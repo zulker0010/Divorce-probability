@@ -1,6 +1,8 @@
 import pandas as pd
 import numpy as np
 from matplotlib import pyplot as plt
+from sklearn.linear_model import LinearRegression
+
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_colwidth',None)
@@ -24,16 +26,47 @@ plt.show
 correlation_Love_dP = np.corrcoef(Love,dP)
 print(correlation_Love_dP)
 
-Income = clean_data.Good_Income
-correlation_Income_dP   =   np.corrcoef(Income,dP)
-print(correlation_Income_dP)
+gI = clean_data.Good_Income
+correlation_gI_dP   =   np.corrcoef(gI,dP)
+print(correlation_gI_dP)
 
 plt.figure()
-plt.scatter(Income,dP)
-plt.xlabel('Income')
+plt.scatter(gI,dP)
+plt.xlabel('Good Income')
 plt.ylabel('Divorce Probability')
 plt.legend
 plt.show
+
+X_love = df['Love'].values.reshape(-1,1)
+Y_dP = df['Divorce_Probability'].values
+
+model = LinearRegression()
+model.fit(X_love,Y_dP)
+
+slope = model.coef_[0]
+intercept   =   model.intercept_
+plt.figure()
+plt.scatter(X_love,Y_dP)
+plt.plot(X_love,slope * X_love + intercept, color='red',label='Linear Regression Line')
+plt.xlabel('Love')
+plt.ylabel('Divorce Probability')
+plt.show()
+
+X_gI = df['Good_Income'].values.reshape(-1,1)
+Y_dP = df['Divorce_Probability'].values
+
+model = LinearRegression()
+model.fit(X_gI,Y_dP)
+
+slope = model.coef_[0]
+intercept   =   model.intercept_
+plt.figure()
+plt.scatter(X_gI,Y_dP)
+plt.plot(X_gI,slope * X_gI + intercept, color='red',label='Linear Regression Line')
+plt.xlabel('Good Income')
+plt.ylabel('Divorce Probability')
+plt.show()
+ 
 
 
 
