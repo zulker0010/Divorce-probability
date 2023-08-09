@@ -67,6 +67,23 @@ plt.xlabel('Good Income')
 plt.ylabel('Divorce Probability')
 plt.show()
  
+correlation_gI_Love = np.corrcoef(gI,Love)
+print(correlation_gI_Love)
+
+X_Inc = df["Good_Income"].values.reshape(-1,1)
+Y_love= df["Love"].values
+model =  LinearRegression()
+
+model.fit(X_Inc,Y_love)
+slope = model.coef_[0]
+intercept = model.intercept_
+
+plt.figure
+plt.scatter(Love,gI, label="Good Income vs Love")
+plt.plot(X_gI,slope*X_gI+intercept, color='red', label="Linear Regression Line")
+plt.xlabel('Good Income')
+plt.ylabel('Love')
+plt.show()
 
 
 
