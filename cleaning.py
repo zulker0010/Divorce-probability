@@ -85,8 +85,11 @@ plt.xlabel('Good Income')
 plt.ylabel('Love')
 plt.show()
 
+from causalinference.causal import CausalModel
+causal_dPgI = CausalModel(gI,dP)
 
-
+causal_dPgI.est_via_ols()
+print(causal_dPgI.estimates)
 
 
 
