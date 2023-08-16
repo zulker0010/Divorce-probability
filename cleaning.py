@@ -86,11 +86,9 @@ plt.ylabel('Love')
 plt.show()
 
 from causalinference.causal import CausalModel
-causal_dPgI = CausalModel(gI,dP)
-
-causal_dPgI.est_via_ols()
-print(causal_dPgI.estimates)
-
+dP_causation = CausalModel(gI, dP)
+dP_causation.est_via_ols()
+print(dP_causation.estimates)
 
 
 '''from sklearn.model_selection import train_test_split
